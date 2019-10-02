@@ -1,0 +1,29 @@
+##1.4 Analysis of Algorithms
+
+p.185 mathematical functions and approximations
+
+### Order of growth classifications
+* Constant
+* Logarithmic: 
+  * binary search P.47  
+  * slower than constant
+* linear: proportional to N 
+  * single loop/ access each piece
+* Linearithmic: *N*log*N*
+  * mergesort; quicksort
+* Quadratic: N<sup>2</sup>
+  * two nested loops; all pairs of N
+  * selection sort and insertion sort
+* Cubic: N<sup>3</sup>
+  * ThreeSum
+* Exponential: 2<sup>N</sup>
+  * for any constant b > 1
+  * exhausutive search
+  * check all subsets
+
+### Designing faster algorithms
+* 2-sum: *N*log*N*
+
+### Amortized analysis
+* proposition E: **WHY?**
+
