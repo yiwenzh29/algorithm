@@ -43,7 +43,6 @@ public class Deque<Item> implements Iterable<Item> {
         head = new Node();
         head.item = item;
         head.next = oldhead;
-        head.prev = null;
         if(isEmpty()) tail = head;
         else oldhead.prev = head;
         count++;
@@ -57,7 +56,7 @@ public class Deque<Item> implements Iterable<Item> {
         Node oldtail = tail;
         tail = new Node();
         tail.item = item;
-        tail.next = null;
+        tail.prev = oldtail;
         if(isEmpty()) head = tail;
         else
             oldtail.next = tail;
@@ -88,7 +87,6 @@ public class Deque<Item> implements Iterable<Item> {
         if (isEmpty()) head = tail;
         else tail.next = null;
         return item;
-
     }
 
     // return an iterator over items in order from front to back
@@ -110,33 +108,40 @@ public class Deque<Item> implements Iterable<Item> {
             current = current.next;
             return item;
         }
+        public void remove() {
+            throw new UnsupportedOperationException("remove is not supported by iterators.");
+        }
     }
 
     // unit testing (required)
     public static void main(String[] args){
         Deque deque = new Deque();
-//        boolean c1 = deque.isEmpty();
-//        StdOut.println(c1);
-//        StdOut.println(deque.size());
+        boolean c1 = deque.isEmpty();
+        StdOut.println(deque.size());
+
         //addFirst
         deque.addFirst(3);
         deque.addFirst(4);
-//        boolean c2 = deque.isEmpty();
-//        StdOut.println(c2);
-//        StdOut.println(deque.size());
+        boolean c2 = deque.isEmpty();
+        StdOut.println(deque.size());
         deque.addLast(5);
         deque.addLast(6);
 
+        //remove first
         deque.removeFirst();
-        deque.removeLast();
+        StdOut.println(deque.size());
 
         Iterator fi = deque.iterator();
         while (fi.hasNext())
             StdOut.println(fi.next());
-
-//        deque.removeFirst();
-//        while (fi.hasNext())
-//            StdOut.println(fi.next());
+        //remove last
+        deque.removeLast();
+        StdOut.println(deque.size());
+        //Iterator
+        Iterator fi2 = deque.iterator();
+        while (fi2.hasNext())
+            StdOut.println(fi2.next());
+        fi2.remove();
 
 
 
