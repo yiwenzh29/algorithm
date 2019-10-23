@@ -15,20 +15,22 @@ public class BruteCollinearPoints {
         if (points == null)
             throw new IllegalArgumentException("The input is null.");
 
+        checkNull(points);
         checkDuplicated(points);
-        checkDuplicated(points);
+
+        Point[] pointsCopy = points.clone();
 
         int N = points.length;
 
         for (int p = 0; p < N - 3; p++) {
             for (int q = p+1; q < N - 2; q++) {
-                double slopepq = points[p].slopeTo(points[q]);
+                double slopepq = pointsCopy[p].slopeTo(points[q]);
                 for (int r = q+1; r < N - 1; r++) {
-                    double slopepr = points[p].slopeTo(points[r]);
+                    double slopepr = pointsCopy[p].slopeTo(points[r]);
                     for (int s = r+1; s < N; s++) {
-                        double slopeps = points[p].slopeTo(points[s]);
+                        double slopeps = pointsCopy[p].slopeTo(points[s]);
                         if (slopepq == slopepr && slopepq == slopeps) {
-                            found.add(new LineSegment(points[p], points[s]));
+                            found.add(new LineSegment(pointsCopy[p], pointsCopy[s]));
                         }
                     }
                 }
