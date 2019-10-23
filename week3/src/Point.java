@@ -86,10 +86,11 @@ public class Point implements Comparable<Point> {
         if (that == null)
             throw new NullPointerException();
 
-        if (that.x == this.x && that.x == this.x)
-            return Double.NEGATIVE_INFINITY;
-        else if (that.y == this.y)
-            return +0.0f;
+        if (that.y == this.y)
+            if (that.x == this.x)
+                return Double.NEGATIVE_INFINITY;
+            else
+                return +0.0f;
         else if (that.x == this.x)
             return Double.POSITIVE_INFINITY;
         else
@@ -121,10 +122,10 @@ public class Point implements Comparable<Point> {
      */
     public static void main(String[] args) {
         Point o1 = new Point(7,2);
-        o1.draw();
+//        o1.draw();
         System.out.println(o1.toString());
         Point o2 = new Point(2, 9);
-        o1.drawTo(o2);
+//        o1.drawTo(o2);
         System.out.println(o1.compareTo(o2));
         System.out.println(o1.slopeTo(o2));
 
