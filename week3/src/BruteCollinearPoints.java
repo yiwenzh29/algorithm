@@ -89,7 +89,7 @@ public class BruteCollinearPoints {
         Point o2 = new Point(0, 10000);
         Point o3 = new Point(3000,7000);
         Point o4 = new Point(7000, 3000);
-        Point o5 = new Point(10000, 0);
+        Point o5 = new Point(20000, 21000);
         Point o6 = new Point(3000, 4000);
         Point o7 = new Point(14000, 15000);
         Point o8 = new Point(6000, 7000);
