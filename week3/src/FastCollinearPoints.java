@@ -14,7 +14,7 @@ public class FastCollinearPoints {
         if (points == null)
             throw new IllegalArgumentException("The input is null.");
 
-        checkDuplicated(points);
+        checkNull(points);
         checkDuplicated(points);
 
         int N = points.length;
@@ -23,36 +23,39 @@ public class FastCollinearPoints {
         Arrays.sort(pointsCopy);
 
 
+
+
         for (int i = 0; i < N - 3; i++) {
             Point p = pointsCopy[i];
-            Arrays.sort(pointsCopy, p.slopeOrder());
+
+            Point[] candidates = new Point[pointsCopy.length -i-1];
+            int dist = i;
+            for (int j = 0; j < candidates.length; j++)
+                candidates[j] = pointsCopy[j+1+dist];
+
+            Arrays.sort(candidates, p.slopeOrder());
+
+            int first = 0;
 
 
-            int first = 1;
+            while (first < candidates.length ) {
+                double SLOPE = p.slopeTo(candidates[first]);
+                int second = first;
 
-
-            while (first < N ) {
-                double SLOPE = p.slopeTo(pointsCopy[first]);
-                do {
-                    first++;
-
-                } while (first < N  && Double.compare(p.slopeTo(pointsCopy[first]), SLOPE) == 0);
-                System.out.println(first);
-
-                if (first >= 3 && p.compareTo(pointsCopy[first]) < 0) {
-                    found.add(new LineSegment(p, pointsCopy[first]));
+                while (second < candidates.length && p.slopeTo(candidates[second]) == SLOPE) {
+                    second++;
                 }
+
+                if (second - first >= 3 && p.slopeTo(candidates[second-1]) == SLOPE) {
+
+
+                        found.add(new LineSegment(p, candidates[second-1]));
+                }
+
+                first = second;
             }
 
-//            for (int origin = 0, first = 1, last = 2; last < N; last++) {
-//                while (last < N && Double.compare(pointsCopy[origin].slopeTo(pointsCopy[first]), pointsCopy[origin].slopeTo(pointsCopy[last])) == 0) {
-//                    last++;
-//                }
-//                if (last - first >= 3 && pointsCopy[origin].compareTo(pointsCopy[first]) < 0) {
-//                    found.add(new LineSegment(pointsCopy[origin], pointsCopy[last]));
-//                }
-//                first = last + 1;
-//            }
+
         }
 
     }
@@ -132,15 +135,37 @@ public class FastCollinearPoints {
 
         Arrays.sort(pointsCopy);
 
+        for (int j = 0; j < points.length; j++) {
+            System.out.println(pointsCopy[j].toString());
+        }
+        System.out.println();
 
-//        for (int i = 0; i < pointsCopy.length - 6; i++) {
-//            Point p = pointsCopy[i];
-//            Arrays.sort(pointsCopy, p.slopeOrder());
-//            for (int j = 0; j < points.length; j++) {
-//                System.out.println(pointsCopy[j].toString());
+
+        for (int i = 0; i < pointsCopy.length - 6; i++) {
+            Point p = pointsCopy[i];
+            for (int k = i+1; k < pointsCopy.length; k++) {
+                System.out.println(p.slopeTo(pointsCopy[k]));
+            }
+
+            Point[] candidates = new Point[pointsCopy.length -i-1];
+            int dist = i;
+            for (int j = 0; j < candidates.length; j++)
+                candidates[j] = pointsCopy[j+1+dist];
+
+            System.out.println();
+//            System.out.println(candidates[6]);
+
+            for (int q = 0; q < candidates.length; q++) {
+                System.out.println(candidates[q].toString());
+            }
+            System.out.println();
+//
+//            Arrays.sort(candidates, p.slopeOrder());
+//            for (int j = 0; j < candidates.length; j++) {
+//                System.out.println(candidates[j].toString());
 //            }
 //            System.out.println();
-//        }
+        }
 
 
 
