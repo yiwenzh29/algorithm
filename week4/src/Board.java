@@ -2,10 +2,17 @@ public class Board {
 
     // create a board from an n-by-n array of tiles,
     // where tiles[row][col] = tile at (row, col)
-    public Board(int[][] tiles)
+    public Board(int[][] tiles) {
+
+    }
 
     // string representation of this board
-    public String toString()
+    public String toString() {
+        for (int i = 0; i < row; i++)
+            for (int j = 0; j < col; j++) {
+
+            }
+    }
 
     // board dimension n
     public int dimension()

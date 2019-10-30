@@ -36,8 +36,4 @@ public class Solver {
                 StdOut.println(board);
         }
     }
-
-    }
-
-
 }
