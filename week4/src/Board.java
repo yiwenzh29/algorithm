@@ -85,7 +85,7 @@ public class Board {
             for (int j = 0; j < col; j++) {
                 if (blocks[i*col + j] != i*col + j + 1 && blocks[i*col+j] != 0)
                     return false;
-                else if (blocks[i*col+j] == 0 && i+col+j != blocks.length-1)
+                else if (blocks[i*col+j] == 0 && i*col+j != blocks.length-1)
                     return false;
             }
         }
@@ -99,7 +99,7 @@ public class Board {
         if (y == copy)
             return true;
 
-        if (y == null)
+        if (y == null || !(y instanceof Board))
             return false;
 
 
@@ -174,10 +174,10 @@ public class Board {
             return new Board(swap(0, 0, 0, 1));
 
         else if (blocks[0] == 0)
-            return new Board(swap(0,1,0,2));
+            return new Board(swap(0,1,1,0));
 
         else if (blocks[1] == 0)
-            return new Board(swap(0,0,0,2));
+            return new Board(swap(0,0,1,0));
 
         throw new RuntimeException();
 
@@ -187,10 +187,12 @@ public class Board {
     public static void main(String[] args) {
         int[][] test  =
                 {
-                        {8, 1, 3},
-                        {4, 0, 2},
-                        {7, 6, 5},
+                        {1, 2, 3, 4},
+                        {5, 6, 7, 8},
+                        {9, 10, 11, 12,},
+                        {13, 14, 15, 0}
                 };
+
         Board b = new Board(test);
 //        for (int i = 0; i < test.length; i++) {
 //            for (int j = 0; j < test.length; j++) {
@@ -212,7 +214,8 @@ public class Board {
 
 //        System.out.println(b.manhattan());
 
-//        System.out.println(b.isGoal());
+        System.out.println(b.isGoal());
+        System.out.println(b.twin().toString());
 
 
 //        System.out.println(b.twin().toString());

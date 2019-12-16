@@ -55,6 +55,7 @@ public class PointSET {
 
     }            // all points that are inside the rectangle (or on the boundary)
     public Point2D nearest(Point2D p) {
+        checkNullArg(p);
         if (size() == 0)
             return null;
 

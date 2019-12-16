@@ -1,6 +1,9 @@
 import edu.princeton.cs.algs4.Point2D;
 import edu.princeton.cs.algs4.RectHV;
 import edu.princeton.cs.algs4.Stack;
+import edu.princeton.cs.algs4.StdDraw;
+
+import java.util.NoSuchElementException;
 
 public class KdTree {
 
@@ -108,15 +111,47 @@ public class KdTree {
         return getSize(root);
     }
 
-    public void insert(Point2D p) {
-        root = insert(root, p, HOR, null);
-    }
-
     private int getSize(Node n) {
         if (n == null)
             return 0;
         return n.size;
     }
+
+    public void draw() {
+        if(root == null)
+            return;
+        RectHV r = new RectHV(0,0,1,1);
+        r.draw();
+
+        drawDivision(root, r);
+    }
+
+    private void drawDivision(Node n, RectHV r) {
+        if (n == null)
+            return;
+
+        new Point2D(n.point.x(), n.point.y()).draw();
+
+        Point2D min, max;
+        if (n.direction == VER) {
+            min = new Point2D(n.point.x(), r.ymin());
+            max = new Point2D(n.point.x(), r.ymax());
+        }
+        else {
+            min = new Point2D(r.xmin(), n.point.y());
+            max = new Point2D(r.xmax(), n.point.y());
+        }
+
+        min.drawTo(max);
+
+    }
+
+
+
+    public void insert(Point2D p) {
+        root = insert(root, p, HOR, null);
+    }
+
 
     private Node insert(Node n, Point2D p, boolean d, Node parent) {
         checkNull(p);
@@ -128,6 +163,8 @@ public class KdTree {
             }
             else
                 r = parent.newRect(p);
+
+            return new Node(p, d, r);
         }
 
         if (n.compareTo(p) > 0) {
